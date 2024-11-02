@@ -59,7 +59,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/Rahmas',
+    basename: '/',
   },
 );
 
