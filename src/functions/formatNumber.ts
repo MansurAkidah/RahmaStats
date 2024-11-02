@@ -8,10 +8,9 @@ interface FormatOptions {
 export const formatNumber = (
   price: number,
   format: string = 'en-IN',
-  options: FormatOptions = { style: 'currency', currency: 'USD' },
+  options: FormatOptions = { style: 'currency', currency: 'KSH' },
 ): string => {
   return new Intl.NumberFormat(format, {
-    style: options.style,
     currency: options.currency,
   }).format(price);
 };

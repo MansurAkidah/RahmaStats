@@ -2,7 +2,7 @@ import Chip from '@mui/material/Chip';
 import IconifyIcon from 'components/base/IconifyIcon';
 
 interface StatusChipProps {
-  status: 'delivered' | 'canceled' | 'pending';
+  status: 'in_stock' | 'out_of_stock' | 'low_stock' | 'delivered' | 'cancelled' | 'pending';
 }
 
 const StatusChip = ({ status }: StatusChipProps) => {
@@ -15,9 +15,9 @@ const StatusChip = ({ status }: StatusChipProps) => {
           icon="radix-icons:dot-filled"
           sx={(theme) => ({
             color:
-              status === 'delivered'
+              (status === 'in_stock' || status === 'delivered')
                 ? `${theme.palette.success.main} !important`
-                : status === 'pending'
+                : (status === 'low_stock' || status === 'pending')
                   ? `${theme.palette.warning.main} !important`
                   : `${theme.palette.error.main} !important`,
           })}
@@ -29,22 +29,22 @@ const StatusChip = ({ status }: StatusChipProps) => {
         width: 80,
         justifyContent: 'center',
         color:
-          status === 'delivered'
+        (status === 'in_stock' || status === 'delivered')
             ? 'success.main'
-            : status === 'pending'
+            : (status === 'low_stock' || status === 'pending')
               ? 'warning.main'
               : 'error.main',
         letterSpacing: 0.5,
         bgcolor:
-          status === 'delivered'
+        (status === 'in_stock' || status === 'delivered')
             ? 'transparent.success.main'
-            : status === 'pending'
+            : (status === 'low_stock' || status === 'pending')
               ? 'transparent.warning.main'
               : 'transparent.error.main',
         borderColor:
-          status === 'delivered'
+        (status === 'in_stock' || status === 'delivered')
             ? 'transparent.success.main'
-            : status === 'pending'
+            : (status === 'low_stock' || status === 'pending')
               ? 'transparent.warning.main'
               : 'transparent.error.main',
       }}

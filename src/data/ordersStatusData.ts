@@ -4,10 +4,10 @@ import { formatNumber } from 'functions/formatNumber';
 export const ordersStatusData: GridRowsProp = [
   {
     id: '#1532',
-    client: { name: 'John Carter', email: 'hello@johncarter.com' },
+    client: { name: 'Mansur Akidah', email: 'hello@mansur.com' },
     date: new Date('Jan 30, 2024'),
     status: 'delivered',
-    country: 'United States',
+    country: 'Kenya, Mumias',
     total: formatNumber(1099.24),
   },
   {
@@ -15,7 +15,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Sophie Moore', email: 'contact@sophiemoore.com' },
     date: new Date('Jan 27, 2024'),
     status: 'canceled',
-    country: 'United Kingdom',
+    country: 'Kenya, Nairobi',
     total: formatNumber(5870.32),
   },
   {
@@ -23,7 +23,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Matt Cannon', email: 'info@mattcannon.com' },
     date: new Date('Jan 24, 2024'),
     status: 'delivered',
-    country: 'Australia',
+    country: 'Kenya, Bungoma',
     total: formatNumber(13899.48),
   },
   {
@@ -31,7 +31,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Graham Hills', email: 'hi@grahamhills.com' },
     date: new Date('Jan 21, 2024'),
     status: 'pending',
-    country: 'India',
+    country: 'Kenya, Nairobi',
     total: formatNumber(1569.12),
   },
   {
@@ -39,7 +39,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Sandy Houston', email: 'contact@sandyhouston.com' },
     date: new Date('Jan 18, 2024'),
     status: 'delivered',
-    country: 'Canada',
+    country: 'Kenya, Nairobi',
     total: formatNumber(899.16),
   },
   {
@@ -47,7 +47,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Andy Smith', email: 'hello@andysmith.com' },
     date: new Date('Jan 15, 2024'),
     status: 'pending',
-    country: 'United States',
+    country: 'Kenya, Mumias',
     total: formatNumber(2449.64),
   },
   {
@@ -55,7 +55,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Emma Grace', email: 'wow@emmagrace.com' },
     date: new Date('Jan 12, 2024'),
     status: 'delivered',
-    country: 'Australia',
+    country: 'Kenya, Nakuru',
     total: formatNumber(6729.82),
   },
   {
@@ -63,7 +63,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Ava Rose', email: 'me@avarose.com' },
     date: new Date('Jan 09, 2024'),
     status: 'canceled',
-    country: 'Canada',
+    country: 'Kenya, Juja',
     total: formatNumber(784.94),
   },
   {
@@ -71,7 +71,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Olivia Jane', email: 'info@oliviajane.com' },
     date: new Date('Jan 06, 2024'),
     status: 'pending',
-    country: 'Singapur',
+    country: 'Kenya, Nairobi',
     total: formatNumber(1247.86),
   },
   {
@@ -79,7 +79,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Mason Alexander', email: 'myinfo@alexander.com' },
     date: new Date('Jan 03, 2024'),
     status: 'delivered',
-    country: 'United States',
+    country: 'Kenya, Bungoma',
     total: formatNumber(304.89),
   },
   {
@@ -87,7 +87,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Samuel David', email: 'me@samueldavid.com' },
     date: new Date('Jan 01, 2024'),
     status: 'pending',
-    country: 'Japan',
+    country: 'Kenya, Mumias',
     total: formatNumber(2209.76),
   },
   {
@@ -95,7 +95,7 @@ export const ordersStatusData: GridRowsProp = [
     client: { name: 'Henry Joseph', email: 'contact@henryjoseph.com' },
     date: new Date('Dec 28, 2023'),
     status: 'delivered',
-    country: 'North Korea',
+    country: 'Kenya, Juja',
     total: formatNumber(5245.68),
   },
 ];

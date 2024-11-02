@@ -26,30 +26,30 @@ const sitemap: MenuItem[] = [
     icon: 'mingcute:home-1-fill',
     active: true,
   },
-  {
-    id: 'features',
-    subheader: 'Features',
-    path: '#!',
-    icon: 'mingcute:star-fill',
-  },
-  {
-    id: 'users',
-    subheader: 'Users',
-    path: '#!',
-    icon: 'mingcute:user-2-fill',
-  },
-  {
-    id: 'pricing',
-    subheader: 'Pricing',
-    path: '#!',
-    icon: 'mingcute:currency-dollar-2-line',
-  },
-  {
-    id: 'integrations',
-    subheader: 'Integrations',
-    path: '#!',
-    icon: 'mingcute:plugin-2-fill',
-  },
+  // {
+  //   id: 'features',
+  //   subheader: 'Features',
+  //   path: '#!',
+  //   icon: 'mingcute:star-fill',
+  // },
+  // {
+  //   id: 'users',
+  //   subheader: 'Users',
+  //   path: '#!',
+  //   icon: 'mingcute:user-2-fill',
+  // },
+  // {
+  //   id: 'pricing',
+  //   subheader: 'Pricing',
+  //   path: '#!',
+  //   icon: 'mingcute:currency-dollar-2-line',
+  // },
+  // {
+  //   id: 'integrations',
+  //   subheader: 'Integrations',
+  //   path: '#!',
+  //   icon: 'mingcute:plugin-2-fill',
+  // },
   {
     id: 'authentication',
     subheader: 'Authentication',
@@ -67,24 +67,24 @@ const sitemap: MenuItem[] = [
       },
     ],
   },
-  {
-    id: 'settings',
-    subheader: 'Settings',
-    path: '#!',
-    icon: 'material-symbols:settings-rounded',
-    active: true,
-  },
-  {
-    id: 'template-pages',
-    subheader: 'Template pages',
-    path: '#!',
-    icon: 'mingcute:document-2-fill',
-  },
-  {
-    id: 'account-settings',
-    subheader: 'John Carter',
-    path: '#!',
-  },
+  // {
+  //   id: 'settings',
+  //   subheader: 'Settings',
+  //   path: '#!',
+  //   icon: 'material-symbols:settings-rounded',
+  //   active: true,
+  // },
+  // {
+  //   id: 'template-pages',
+  //   subheader: 'Template pages',
+  //   path: '#!',
+  //   icon: 'mingcute:document-2-fill',
+  // },
+  // {
+  //   id: 'account-settings',
+  //   subheader: 'John Carter',
+  //   path: '#!',
+  // },
 ];
 
 export default sitemap;

@@ -1,7 +1,7 @@
 import { fontFamily } from 'theme/typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Tooltip from '@mui/material/Tooltip';
+//import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
 import ButtonBase from '@mui/material/ButtonBase';
 import IconButton from '@mui/material/IconButton';
@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import LogoImg from 'assets/images/Logo.png';
-import LanguageSelect from './LanguageSelect';
+//import LanguageSelect from './LanguageSelect';
 import ProfileMenu from './ProfileMenu';
 
 interface TopbarProps {
@@ -61,13 +61,13 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
       </Stack>
 
       <Stack spacing={1} alignItems="center">
-        <LanguageSelect />
+        {/* <LanguageSelect />
 
         <Tooltip title="Notifications">
           <IconButton size="large" sx={{ color: 'text.secondary' }}>
             <IconifyIcon icon="ion:notifications" />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
 
         <ProfileMenu />
       </Stack>

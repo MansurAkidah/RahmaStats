@@ -2,44 +2,44 @@ import { fontFamily } from 'theme/typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import iPhone from 'assets/images/iPhone.png';
-import AWS8 from 'assets/images/AWS8.png';
+import location from 'assets/images/Location.png';
+//import AWS8 from 'assets/images/AWS8.png';
 import Product from './Product';
 
-const productsData = [
+const shops = [
   {
     id: 1,
-    name: 'iPhone 14 Pro Max',
-    imageUrl: iPhone,
+    name: 'Harambee',
+    imageUrl: location,
     inStock: 524,
-    price: '1,099.00',
+    price: '100,099.00',
   },
-  {
-    id: 2,
-    name: 'Apple Watch S8',
-    imageUrl: AWS8,
-    inStock: 320,
-    price: '799.00',
-  },
+  // {
+  //   id: 2,
+  //   name: 'Apple Watch S8',
+  //   imageUrl: AWS8,
+  //   inStock: 320,
+  //   price: '799.00',
+  // },
 ];
 
 const Products = () => {
   return (
     <Stack direction="column" gap={3.75} component={Paper} height={300}>
       <Typography variant="h6" fontWeight={400} fontFamily={fontFamily.workSans}>
-        Products
+        Shops
       </Typography>
 
       <Stack justifyContent="space-between">
         <Typography variant="caption" fontWeight={400}>
-          Products
+          Shops
         </Typography>
         <Typography variant="caption" fontWeight={400}>
-          Price
+          Revenue
         </Typography>
       </Stack>
 
-      {productsData.map((item) => {
+      {shops.map((item) => {
         return <Product key={item.id} data={item} />;
       })}
     </Stack>

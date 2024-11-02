@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import ButtonBase from '@mui/material/ButtonBase';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from '@mui/material/Typography';
@@ -13,7 +13,7 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import CollapseListItem from './list-items/CollapseListItem';
 import ProfileListItem from './list-items/ProfileListItem';
 import ListItem from './list-items/ListItem';
-import LogoImg from 'assets/images/Logo.png';
+import LogoImg from 'assets/images/iPhone.png';
 import { topListData, bottomListData, profileListData } from 'data/sidebarListData';
 
 const DrawerItems = () => {
@@ -33,7 +33,7 @@ const DrawerItems = () => {
         <ButtonBase component={Link} href="/" disableRipple>
           <Image src={LogoImg} alt="logo" height={24} width={24} sx={{ mr: 1 }} />
           <Typography variant="h5" color="text.primary" fontWeight={600} letterSpacing={1}>
-            Dashdark X
+            Rahmas
           </Typography>
         </ButtonBase>
       </Stack>
@@ -74,7 +74,7 @@ const DrawerItems = () => {
         {profileListData && <ProfileListItem {...profileListData} />}
       </List>
 
-      <Box px={3.5} pt={6} pb={12} width={1}>
+      {/* <Box px={3.5} pt={6} pb={12} width={1}>
         <Button
           variant="contained"
           color="primary"
@@ -84,7 +84,7 @@ const DrawerItems = () => {
         >
           Get template
         </Button>
-      </Box>
+      </Box> */}
     </>
   );
 };

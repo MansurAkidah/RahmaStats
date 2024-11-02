@@ -4,15 +4,15 @@ import TopCard from './TopCard';
 const cardsData = [
   {
     id: 1,
-    title: 'Save Products',
+    title: 'Monthly Sales',
     value: '50.8K',
     rate: '28.4%',
     isUp: true,
-    icon: 'carbon:favorite-filled',
+    icon: 'healthicons:money-bag',
   },
   {
     id: 2,
-    title: 'Stock Products',
+    title: 'Products in Stock',
     value: '23.6K',
     rate: '12.6%',
     isUp: false,
@@ -20,7 +20,7 @@ const cardsData = [
   },
   {
     id: 3,
-    title: 'Sale Products',
+    title: 'Products sold',
     value: '756',
     rate: '3.1%',
     isUp: true,
@@ -32,7 +32,7 @@ const cardsData = [
     value: '2.3K',
     rate: '11.3%',
     isUp: true,
-    icon: 'mingcute:currency-dollar-2-line',
+    icon: 'healthicons:coins',
   },
 ];
 

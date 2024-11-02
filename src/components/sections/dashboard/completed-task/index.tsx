@@ -12,7 +12,7 @@ const CompletedTask = () => {
       <Stack alignItems="center" spacing={0.6}>
         <IconifyIcon icon="ph:clock-fill" color="text.secondary" fontSize="h6.fontSize" />
         <Typography variant="body2" color="text.secondary">
-          Completed tasks over time
+          Products sold over time
         </Typography>
       </Stack>
 
