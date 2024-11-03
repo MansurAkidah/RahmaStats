@@ -1,4 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+
+// MUI imports
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -13,20 +17,49 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import paths from 'routes/paths';
 
 interface User {
-  [key: string]: string;
+  email: string;
+  password: string;
 }
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { login, googleSignIn } = useAuth();
+  
   const [user, setUser] = useState<User>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    
+    try {
+      setError('');
+      setLoading(true);
+      await login(user.email, user.password);
+      navigate('/'); // Adjust this path as needed
+    } catch (err) {
+      setError('Failed to log in');
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setError('');
+      setLoading(true);
+      await googleSignIn();
+      navigate('/'); // Adjust this path as needed
+    } catch (err) {
+      setError('Failed to sign in with Google');
+      console.error(err);
+    }
+    setLoading(false);
   };
 
   return (
@@ -34,12 +67,21 @@ const Login = () => {
       <Typography align="center" variant="h3" fontWeight={600}>
         LogIn
       </Typography>
+
+      {error && (
+        <Typography color="error" textAlign="center" mt={2}>
+          {error}
+        </Typography>
+      )}
+
       <Stack direction={{ xs: 'column', sm: 'row' }} mt={4} spacing={2} width={1}>
         <Button
           variant="contained"
           color="secondary"
           fullWidth
           startIcon={<IconifyIcon icon="logos:google-icon" />}
+          onClick={handleGoogleSignIn}
+          disabled={loading}
         >
           Login with Google
         </Button>
@@ -48,11 +90,14 @@ const Login = () => {
           color="secondary"
           fullWidth
           startIcon={<IconifyIcon icon="uim:apple" sx={{ mb: 0.35 }} />}
+          disabled
         >
           Login with Apple
         </Button>
       </Stack>
+
       <Divider sx={{ my: 3 }}>or Login with</Divider>
+
       <Stack onSubmit={handleSubmit} component="form" direction="column" gap={2}>
         <TextField
           id="email"
@@ -66,6 +111,7 @@ const Login = () => {
           fullWidth
           autoFocus
           required
+          disabled={loading}
         />
         <TextField
           id="password"
@@ -78,6 +124,7 @@ const Login = () => {
           autoComplete="current-password"
           fullWidth
           required
+          disabled={loading}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end" sx={{ opacity: user.password ? 1 : 0 }}>
@@ -92,6 +139,7 @@ const Login = () => {
             ),
           }}
         />
+
         <Stack mt={-1.5} alignItems="center" justifyContent="space-between">
           <FormControlLabel
             control={<Checkbox id="checkbox" name="checkbox" color="primary" />}
@@ -101,9 +149,17 @@ const Login = () => {
             Forgot password?
           </Link>
         </Stack>
-        <Button type="submit" variant="contained" size="medium" fullWidth>
+
+        <Button 
+          type="submit" 
+          variant="contained" 
+          size="medium" 
+          fullWidth
+          disabled={loading}
+        >
           Submit
         </Button>
+
         <Typography
           my={3}
           color="text.secondary"
