@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -15,45 +17,76 @@ interface MenuItems {
   id: number;
   title: string;
   icon: string;
+  action?: () => void;
 }
 
-const menuItems: MenuItems[] = [
-  {
-    id: 1,
-    title: 'View Profile',
-    icon: 'mingcute:user-2-fill',
-  },
-  {
-    id: 2,
-    title: 'Account Settings',
-    icon: 'material-symbols:settings-account-box-rounded',
-  },
-  {
-    id: 3,
-    title: 'Notifications',
-    icon: 'ion:notifications',
-  },
-  {
-    id: 4,
-    title: 'Switch Account',
-    icon: 'material-symbols:switch-account',
-  },
-  {
-    id: 5,
-    title: 'Help Center',
-    icon: 'material-symbols:live-help',
-  },
-  {
-    id: 6,
-    title: 'Logout',
-    icon: 'material-symbols:logout',
-  },
-];
+
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [userName, setUserName] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>('');
   const open = Boolean(anchorEl);
+  const auth = getAuth();
+  const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/authentication/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+  const menuItems: MenuItems[] = [
+    {
+      id: 1,
+      title: 'View Profile',
+      icon: 'mingcute:user-2-fill',
+    },
+    {
+      id: 2,
+      title: 'Account Settings',
+      icon: 'material-symbols:settings-account-box-rounded',
+    },
+    {
+      id: 3,
+      title: 'Notifications',
+      icon: 'ion:notifications',
+    },
+    {
+      id: 4,
+      title: 'Switch Account',
+      icon: 'material-symbols:switch-account',
+    },
+    {
+      id: 5,
+      title: 'Help Center',
+      icon: 'material-symbols:live-help',
+    },
+    {
+      id: 6,
+      title: 'Logout',
+      icon: 'material-symbols:logout',
+      action: handleLogout
+    },
+  ];
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Set the display name if available, otherwise use email
+        setUserName(user.displayName || user.email?.split('@')[0] || 'User');
+        setUserEmail(user.email || '');
+      } else {
+        setUserName('');
+        setUserEmail('');
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [auth]);
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,6 +95,12 @@ const ProfileMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleMenuItemClick = (item: MenuItems) => {
+    handleProfileMenuClose();
+    if (item.action) {
+      item.action();
+    }
+  };
   return (
     <>
       <Tooltip title="Profile">
@@ -74,7 +113,7 @@ const ProfileMenu = () => {
             aria-haspopup="true"
           >
             <Avatar
-              src={AvatarImage}
+              src={auth.currentUser?.photoURL || AvatarImage}
               sx={(theme) => ({
                 ml: 0.8,
                 height: 32,
@@ -82,7 +121,7 @@ const ProfileMenu = () => {
                 bgcolor: theme.palette.primary.main,
               })}
             />
-            <Typography variant="subtitle2">Ustadha Rahma</Typography>
+            <Typography variant="subtitle2">{userName}</Typography>
           </Stack>
         </ButtonBase>
       </Tooltip>
@@ -116,10 +155,10 @@ const ProfileMenu = () => {
           />
           <Stack direction="column">
             <Typography variant="body2" fontWeight={500}>
-              Rahma Akida
+              {userName}
             </Typography>
             <Typography variant="caption" fontWeight={400} color="text.secondary">
-              rahma@akida.com
+              {userEmail}
             </Typography>
           </Stack>
         </MenuItem>
@@ -128,7 +167,7 @@ const ProfileMenu = () => {
 
         {menuItems.map((item) => {
           return (
-            <MenuItem key={item.id} onClick={handleProfileMenuClose} sx={{ py: 1 }}>
+            <MenuItem key={item.id} onClick={() => handleMenuItemClick(item)} sx={{ py: 1 }}>
               <ListItemIcon sx={{ mr: 2, fontSize: 'button.fontSize' }}>
                 <IconifyIcon icon={item.icon} />
               </ListItemIcon>

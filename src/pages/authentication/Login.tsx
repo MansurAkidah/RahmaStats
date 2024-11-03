@@ -1,53 +1,53 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';//, ChangeEvent, FormEvent
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 // MUI imports
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
+// import Divider from '@mui/material/Divider';
+// import IconButton from '@mui/material/IconButton';
+// import TextField from '@mui/material/TextField';
+// import InputAdornment from '@mui/material/InputAdornment';
+// import paths from 'routes/paths';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
-import paths from 'routes/paths';
 
-interface User {
-  email: string;
-  password: string;
-}
+// interface User {
+//   email: string;
+//   password: string;
+// }
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, googleSignIn } = useAuth();
+  const { googleSignIn } = useAuth();//login,
   
-  const [user, setUser] = useState<User>({ email: '', password: '' });
-  const [showPassword, setShowPassword] = useState(false);
+  //const [user, setUser] = useState<User>({ email: '', password: '' });
+  //const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setUser({ ...user, [e.target.name]: e.target.value });
+  // };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
     
-    try {
-      setError('');
-      setLoading(true);
-      await login(user.email, user.password);
-      navigate('/'); // Adjust this path as needed
-    } catch (err) {
-      setError('Failed to log in');
-      console.error(err);
-    }
-    setLoading(false);
-  };
+  //   try {
+  //     setError('');
+  //     setLoading(true);
+  //     await login(user.email, user.password);
+  //     navigate('/'); // Adjust this path as needed
+  //   } catch (err) {
+  //     setError('Failed to log in');
+  //     console.error(err);
+  //   }
+  //   setLoading(false);
+  // };
 
   const handleGoogleSignIn = async () => {
     try {
@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <>
       <Typography align="center" variant="h3" fontWeight={600}>
-        LogIn
+        Sign In
       </Typography>
 
       {error && (
@@ -83,22 +83,22 @@ const Login = () => {
           onClick={handleGoogleSignIn}
           disabled={loading}
         >
-          Login with Google
+          SignIn with Google
         </Button>
         <Button
           variant="contained"
           color="secondary"
           fullWidth
-          startIcon={<IconifyIcon icon="uim:apple" sx={{ mb: 0.35 }} />}
+          startIcon={<IconifyIcon icon="uim:github" sx={{ mb: 0.35 }} />}
           disabled
         >
-          Login with Apple
+          Login with GitHub
         </Button>
       </Stack>
 
-      <Divider sx={{ my: 3 }}>or Login with</Divider>
+      {/* <Divider sx={{ my: 3 }}>or Login with</Divider> */}
 
-      <Stack onSubmit={handleSubmit} component="form" direction="column" gap={2}>
+      {/* <Stack onSubmit={handleSubmit} component="form" direction="column" gap={2}>
         <TextField
           id="email"
           name="email"
@@ -169,7 +169,7 @@ const Login = () => {
         >
           Don't have an account? <Link href={paths.signup}>{'Signup'}</Link>
         </Typography>
-      </Stack>
+      </Stack> */}
     </>
   );
 };
