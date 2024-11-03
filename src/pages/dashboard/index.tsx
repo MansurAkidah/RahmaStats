@@ -29,12 +29,13 @@ const Dashboard = () => {
       <Grid item xs={12} xl={8}>
         <CompletedTask />
       </Grid>
+      
+      <Grid item xs={12}>
+        <ProductsStatus />
+      </Grid>
 
       <Grid item xs={12}>
         <OrdersStatus />
-      </Grid>
-      <Grid item xs={12}>
-        <ProductsStatus />
       </Grid>
     </Grid>
   );

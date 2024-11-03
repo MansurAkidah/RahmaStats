@@ -194,7 +194,7 @@ const OrdersStatusTable = ({ searchText }: OrdersStatusTableProps) => {
             fontSize="h5.fontSize"
           />
           <Typography mt={0.175} variant="caption" letterSpacing={0.5}>
-            Country
+            Location
           </Typography>
         </Stack>
       ),

@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import LogoImg from 'assets/images/Logo.png';
+import LogoImg from 'assets/images/rahmas-white-transparent.png';
 //import LanguageSelect from './LanguageSelect';
 import ProfileMenu from './ProfileMenu';
 
@@ -46,7 +46,7 @@ const Topbar = ({ isClosing, mobileOpen, setMobileOpen }: TopbarProps) => {
           disableRipple
           sx={{ display: { xm: 'block', lg: 'none' } }}
         >
-          <Image src={LogoImg} alt="logo" height={24} width={24} />
+          <Image src={LogoImg} alt="logo" height={28}  />
         </ButtonBase>
 
         <Typography
