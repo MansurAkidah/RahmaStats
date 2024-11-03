@@ -1,7 +1,7 @@
 import { useState } from 'react';//, ChangeEvent, FormEvent
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-
+import { getAuth, signOut } from 'firebase/auth';
 // MUI imports
 // import Link from '@mui/material/Link';
 // import Divider from '@mui/material/Divider';
@@ -48,13 +48,23 @@ const Login = () => {
   //   }
   //   setLoading(false);
   // };
+  const WHITELISTED_EMAIL = 'akidahmansur@gmail.com';
 
   const handleGoogleSignIn = async () => {
     try {
       setError('');
       setLoading(true);
-      await googleSignIn();
-      navigate('/'); // Adjust this path as needed
+      const result = await googleSignIn();
+      // Check if the user's email matches the whitelisted email
+      if (result?.user?.email === WHITELISTED_EMAIL) {
+        navigate('/'); // Navigate to home if email is whitelisted
+      } else {
+        // If email is not whitelisted, sign out and show error
+        const auth = getAuth();
+        await signOut(auth);
+        setError('Unauthorized email address. Please use an authorized account.');
+        navigate('/authentication/login');
+      }
     } catch (err) {
       setError('Failed to sign in with Google');
       console.error(err);
