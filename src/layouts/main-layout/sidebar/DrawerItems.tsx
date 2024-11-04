@@ -13,7 +13,7 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import CollapseListItem from './list-items/CollapseListItem';
 import ProfileListItem from './list-items/ProfileListItem';
 import ListItem from './list-items/ListItem';
-import LogoImg from 'assets/images/iPhone.png';
+import LogoImg from 'assets/images/rahmas-white-transparent.png';
 import { topListData, bottomListData, profileListData } from 'data/sidebarListData';
 
 const DrawerItems = () => {

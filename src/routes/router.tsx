@@ -6,6 +6,8 @@ import MainLayout from 'layouts/main-layout';
 import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loading/Splash';
 import PageLoader from 'components/loading/PageLoader';
+import PrivateRoute from 'components/authentication/PrivateRoute';
+import AuthRoute from 'components/authentication/AuthRoute';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -24,11 +26,13 @@ const router = createBrowserRouter(
         {
           path: '/',
           element: (
-            <MainLayout>
-              <Suspense fallback={<PageLoader />}>
-                <Outlet />
-              </Suspense>
-            </MainLayout>
+            <PrivateRoute>
+              <MainLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Outlet />
+                </Suspense>
+              </MainLayout>
+            </PrivateRoute>
           ),
           children: [
             {
@@ -40,9 +44,11 @@ const router = createBrowserRouter(
         {
           path: rootPaths.authRoot,
           element: (
-            <AuthLayout>
-              <Outlet />
-            </AuthLayout>
+            <AuthRoute>
+              <AuthLayout>
+                <Outlet />
+              </AuthLayout>
+            </AuthRoute>
           ),
           children: [
             {
