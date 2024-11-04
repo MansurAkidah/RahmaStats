@@ -27,7 +27,7 @@ const Login = () => {
   
   //const [user, setUser] = useState<User>({ email: '', password: '' });
   //const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,37 +52,36 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      setError('');
+      //setError('');
       setLoading(true);
       const result = await googleSignIn();
-      // Check if the user's email matches the whitelisted email
+      
       if (result?.user?.email === WHITELISTED_EMAIL) {
-        navigate('/'); // Navigate to home if email is whitelisted
+        navigate('/'); // This will now work correctly
       } else {
-        // If email is not whitelisted, sign out and show error
         const auth = getAuth();
         await signOut(auth);
-        setError('Unauthorized email address. Please use an authorized account.');
-        navigate('/authentication/login');
+        //setError('Unauthorized email address. Please use an authorized account.');
+        console.log('Error set:', 'Unauthorized email address. Please use an authorized account.'); 
       }
     } catch (err) {
-      setError('Failed to sign in with Google');
+      //setError('Failed to sign in with Google');
       console.error(err);
     }
     setLoading(false);
   };
-
   return (
     <>
       <Typography align="center" variant="h3" fontWeight={600}>
         Sign In
       </Typography>
 
-      {error && (
-        <Typography color="error" textAlign="center" mt={2}>
-          {error}
-        </Typography>
-      )}
+      
+      <Typography color="error" textAlign="center" mt={2}>
+        Note: Only authorized emails allowed
+      </Typography>
+      
+       
 
       <Stack direction={{ xs: 'column', sm: 'row' }} mt={4} spacing={2} width={1}>
         <Button
