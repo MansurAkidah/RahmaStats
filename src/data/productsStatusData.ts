@@ -1,5 +1,82 @@
 import { GridRowsProp } from '@mui/x-data-grid';
 import { formatNumber } from 'functions/formatNumber';
+import { ref, get } from 'firebase/database';
+import { db } from '../config/firebase';
+import { useState, useEffect } from 'react';
+
+interface ProductData {
+  id: string;
+  name: string;
+  category: string;
+  subcategory: string;
+  price: number;
+  cost: number;
+  stock: number;
+}
+interface FormattedProductRow {
+  id: string;
+  product: {
+    name: string;
+    category: string;
+  };
+  lastRestocked?: Date;
+  stockStatus: 'in_stock' | 'low_stock' | 'out_of_stock';
+  volume?: string;
+  price: string;
+  stock: number;
+}
+interface FirebaseProductsData {
+  [key: string]: ProductData;
+}
+const getStockStatus = (stock: number): 'in_stock' | 'low_stock' | 'out_of_stock' => {
+  if (stock <= 0) return 'out_of_stock';
+  if (stock < 10) return 'low_stock';
+  return 'in_stock';
+};
+
+export const useProductsInventoryData = () => {
+  const [productsData, setProductsData] = useState<GridRowsProp>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const productsSnapshot = await get(ref(db, 'products'));
+        const productsRaw = (productsSnapshot.val() || {}) as FirebaseProductsData;
+
+        const formattedProducts: FormattedProductRow[] = Object.entries(productsRaw)
+          .map(([key, value]: [string, ProductData]) => {
+            
+            return {
+              id: key,
+              product: {
+                name: value.name,
+                category: `${value.category}/${value.subcategory}`
+              },
+              stockStatus: getStockStatus(value.stock),
+              price: formatNumber(value.price),
+              stock: value.stock,
+              // You might want to fetch these from additional Firebase collections
+              lastRestocked: new Date(), // Default to current date if not available
+              volume: '330ml', // Default value if not available
+            };
+          });
+
+        setProductsData(formattedProducts);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch products');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return { productsData, loading, error };
+};
 
 export const productsStatusData: GridRowsProp = [
   {

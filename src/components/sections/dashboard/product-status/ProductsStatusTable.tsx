@@ -9,7 +9,8 @@ import Typography from '@mui/material/Typography';
 import StatusChip from 'components/chips/StatusChip';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { productsInventoryData } from 'data/productsStatusData';
+//import { productsInventoryData } from 'data/productsStatusData';
+import { useProductsInventoryData } from 'data/productsStatusData';
 import {
   GridRowModesModel,
   GridRowModes,
@@ -24,6 +25,9 @@ import {
   GridRowEditStopReasons,
   useGridApiRef,
 } from '@mui/x-data-grid';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 
 interface ProductsStatusTableProps {
   searchText: string;
@@ -31,12 +35,33 @@ interface ProductsStatusTableProps {
 
 const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
-  const [rows, setRows] = useState(productsInventoryData);
+  const { productsData, loading, error } = useProductsInventoryData();
+  const [rows, setRows] = useState(productsData);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
+  useEffect(() => {// To update rows when productsData changes
+    if (productsData) {
+      setRows(productsData);
+    }
+  }, [productsData]);
+
+  // useEffect(() => {
+  //   apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
+  // }, [searchText]);
   useEffect(() => {
-    apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
-  }, [searchText]);
+    if (apiRef.current && searchText) {
+      const filterModel = {
+        items: [{
+          field: 'product',
+          operator: 'contains',
+          value: searchText
+        }],
+        quickFilterValues: searchText.split(/\s+/),
+      };
+      
+      apiRef.current.setFilterModel(filterModel);
+    }
+  }, [searchText, apiRef]);
 
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -78,6 +103,20 @@ const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
     setRowModesModel(newRowModesModel);
   };
 
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ mt: 2 }}>
+        Error loading products: {error}
+      </Alert>
+    );
+  }
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight={400}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -296,7 +335,13 @@ const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
             pageSize: 6,
           },
         },
+        filter: {
+          filterModel: {
+            items: [],
+          },
+        },
       }}
+      disableColumnFilter={false}
       checkboxSelection
       pageSizeOptions={[6]}
       disableColumnMenu

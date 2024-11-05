@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import ProductFormModal from '../../../product/productForm'
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -12,6 +13,7 @@ import OrdersStatusTable from './ProductsStatusTable';
 
 const OrdersStatus = () => {
   const [searchText, setSearchText] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -39,9 +41,10 @@ const OrdersStatus = () => {
               ),
             }}
           />
-          <Button variant="contained" size="small">
+          <Button variant="contained" size="small" onClick={() => setIsModalOpen(true)}>
             Add product
           </Button>
+          <ProductFormModal open={isModalOpen} setOpen={setIsModalOpen} />
         </Stack>
       </Stack>
 

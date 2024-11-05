@@ -148,7 +148,7 @@ const ProfileMenu = () => {
       >
         <MenuItem onClick={handleProfileMenuClose} sx={{ '&:hover': { bgcolor: 'info.main' } }}>
           <Avatar
-            src={AvatarImage}
+            src={auth.currentUser?.photoURL ||AvatarImage}
             sx={{
               bgcolor: 'primary.main',
             }}
