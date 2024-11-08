@@ -175,7 +175,7 @@ export default function UtensilsPOS() {
         ...newProduct,
         category: newProduct.category || 'Uncategorized',
         subcategory: newProduct.subcategory || 'Uncategorized',
-        imageSrc: newProduct.imageSrc || `https://placehold.co/300x400/EEE/31343C?font=source-sans-pro&text=${newProduct.name}`,
+        imageSrc: newProduct.imageSrc || `https://placehold.co/300x200/EEE/31343C?font=source-sans-pro&text=${newProduct.name}`,
         cost: newProduct.cost || 0
       })
       alert('Product added successfully')
