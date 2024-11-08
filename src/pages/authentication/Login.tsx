@@ -48,7 +48,7 @@ const Login = () => {
   //   }
   //   setLoading(false);
   // };
-  //const WHITELISTED_EMAIL = 'akidahmansur@gmail.com';
+  const WHITELISTED_EMAIL = 'akidahmansur@gmail.com';
 
   const handleGoogleSignIn = async () => {
     try {
@@ -56,9 +56,11 @@ const Login = () => {
       setLoading(true);
       const result = await googleSignIn();
       
-      //if (result?.user?.email === WHITELISTED_EMAIL) {
+      if (result?.user?.email === WHITELISTED_EMAIL) {
+        navigate('/')
+      }else
       if (result) {
-        navigate('/'); // This will now work correctly
+        navigate('/sales/salesindex'); // This will now work correctly
       } else {
         const auth = getAuth();
         await signOut(auth);

@@ -6,6 +6,7 @@ import Products from 'components/sections/dashboard/products';
 import CompletedTask from 'components/sections/dashboard/completed-task';
 import OrdersStatus from 'components/sections/dashboard/orders-status';
 import ProductsStatus from 'components/sections/dashboard/product-status';
+import UtensilsPOS from 'components/product/productCatalog'
 
 const Dashboard = () => {
   return (
@@ -37,6 +38,15 @@ const Dashboard = () => {
       <Grid item xs={12}>
         <OrdersStatus />
       </Grid>
+
+      {/* <Grid item xs={12}>
+        <POSPage />
+      </Grid> */}
+
+      <Grid item xs={12}>
+        <UtensilsPOS />
+      </Grid>
+
     </Grid>
   );
 };

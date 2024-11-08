@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 interface ProductData {
   id: string;
+  imageSrc: string;
   name: string;
   category: string;
   subcategory: string;
@@ -15,6 +16,7 @@ interface ProductData {
 }
 interface FormattedProductRow {
   id: string;
+  imageSrc: string;
   product: {
     name: string;
     category: string;
@@ -51,6 +53,7 @@ export const useProductsInventoryData = () => {
             
             return {
               id: key,
+              imageSrc: value.imageSrc,
               product: {
                 name: value.name,
                 category: `${value.category}/${value.subcategory}`

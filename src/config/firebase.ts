@@ -34,6 +34,13 @@ export const db = getDatabase(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
+export type UserRole = 'admin' | 'manager' | 'employee';
+
+export interface User {
+  email: string;
+  role: UserRole;
+}
+
 export { firebaseConfig };
 
 export default app;

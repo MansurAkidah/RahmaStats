@@ -28,6 +28,10 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 interface ProductsStatusTableProps {
   searchText: string;
@@ -121,9 +125,108 @@ const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
     {
       field: 'id',
       headerName: 'Code',
-      minWidth: 80,
+      minWidth: 120,
       flex: 1,
       resizable: false,
+      renderCell: (params) => {
+        const [previewOpen, setPreviewOpen] = useState(false);
+    
+        const handlePreviewOpen = () => {
+          setPreviewOpen(true);
+        };
+    
+        const handlePreviewClose = () => {
+          setPreviewOpen(false);
+        };
+    
+        return (
+          <>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <GridActionsCellItem
+                icon={
+                  <Box
+                    component="img"
+                    src={params.row.imageSrc}
+                    alt={`Product ${params.value}`}
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      objectFit: 'cover',
+                      borderRadius: 1,
+                      cursor: 'pointer',
+                    }}
+                    onClick={handlePreviewOpen}
+                  />
+                }
+                label=""
+                onClick={handlePreviewOpen}
+                showInMenu
+              />
+            </Stack>
+    
+            <Dialog open={previewOpen} onClose={handlePreviewClose} maxWidth="md" fullWidth>
+          <DialogTitle>Product Details</DialogTitle>
+          <DialogContent>
+            <Stack spacing={4}>
+              <Box
+                component="img"
+                src={params.row.imageSrc}
+                alt={`Product ${params.value}`}
+                sx={{
+                  width: '100%',
+                  maxHeight: 400,
+                  objectFit: 'contain',
+                }}
+              />
+              <Box
+                sx={{
+                  borderRadius: 2,
+                  p: 3,
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+
+                <Stack spacing={2}>
+                  <Typography variant="h5" fontWeight={700}>
+                    {params.row.product.name}
+                  </Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    
+                  </Typography>
+                  <Divider />
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Typography variant="body1" color="text.secondary">
+                      {params.row.product.category}
+                    </Typography>
+                  </Stack>
+                </Stack>
+                <Divider />
+                <Stack spacing={2}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Typography variant="body1" color="text.secondary">
+                      Price: 
+                    </Typography>
+                    <Typography variant="h6" fontWeight={700}>
+                      Ksh:{params.row.price}
+                    </Typography>
+                  </Stack>
+                  <Divider />
+                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Typography variant="body1" color="text.secondary">
+                      Instock: 
+                    </Typography>
+                    <Stack direction="column" alignSelf="center" justifyContent="center" sx={{ height: 1 }}>
+                      <StatusChip status={params.row.stockStatus} />
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Stack>
+          </DialogContent>
+        </Dialog>
+          </>
+        );
+      },
     },
     {
       field: 'product',
@@ -135,7 +238,7 @@ const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
         <Stack alignItems="center" gap={0.75}>
           <IconifyIcon icon="mingcute:user-2-fill" color="neutral.main" fontSize="body2.fontSize" />
           <Typography variant="caption" mt={0.25} letterSpacing={0.5}>
-            Products
+            Products 
           </Typography>
         </Stack>
       ),
@@ -239,7 +342,6 @@ const OrdersStatusTable = ({ searchText }: ProductsStatusTableProps) => {
       },
       editable: true,
     },
-    
     {
       field: 'price',
       headerName: 'Price',

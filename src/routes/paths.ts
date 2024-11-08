@@ -14,6 +14,8 @@ export default {
   settings: `/${rootPaths.pagesRoot}/settings`,
   templatePages: `/${rootPaths.pagesRoot}/template-pages`,
   accountSettings: `/${rootPaths.pagesRoot}/account-settings`,
+  
+  sales: `/${rootPaths.pagesRoot}/sales`,
 
   login: `/${rootPaths.authRoot}/login`,
   signup: `/${rootPaths.authRoot}/sign-up`,
