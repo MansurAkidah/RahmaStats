@@ -3,21 +3,21 @@ import { useAuth } from '../../context/AuthContext';
 
 const AuthRoute = ({ children }: { children: React.ReactNode }) => {
   const { currentUser } = useAuth(); 
-  const WHITELISTED_EMAIL = 'akidahmansur@gmail.com';
-
+  const ADMIN_EMAIL = 'akidahmansur@gmail.com';
+  const AGENT_EMAIL = 'akidahmansur786@gmail.com'
   
-    if (currentUser?.email === WHITELISTED_EMAIL) {
+    if (currentUser?.email === ADMIN_EMAIL) {
       return <Navigate to="/" />;
     }
-    if (currentUser){
-      return <Navigate to="/sales/salesindex" />;
+    if (currentUser?.email != AGENT_EMAIL){
+      return <Navigate to="/pages/catalog" />;
     }
 
-  // if (currentUser) {
-  //   console.log("Current user found");
-  //   console.log(currentUser.email);
-  //   return <Navigate to="/" />;
-  // }
+  if (currentUser) {
+    console.log("Current user found");
+    console.log(currentUser.email);
+    return <Navigate to="/pages/welcome" />;
+  }
 
   return children;
 };

@@ -60,7 +60,7 @@ const Login = () => {
         navigate('/')
       }else
       if (result) {
-        navigate('/sales/salesindex'); // This will now work correctly
+        navigate('/sales/sales'); // This will now work correctly
       } else {
         const auth = getAuth();
         await signOut(auth);
