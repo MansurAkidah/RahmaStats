@@ -8,9 +8,11 @@ import Splash from 'components/loading/Splash';
 import PageLoader from 'components/loading/PageLoader';
 import PrivateRoute from 'components/authentication/PrivateRoute';
 import AuthRoute from 'components/authentication/AuthRoute';
-import POSPage from 'pages/sales/salesindex';
+//import POSPage from 'pages/sales/salesindex';
 import Landing from 'pages/sales/catalog';
 import LandingPage from 'pages/dashboard/welcome';
+import AboutPage from 'pages/dashboard/about';
+
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
@@ -74,10 +76,10 @@ const router = createBrowserRouter(
             //</AuthRoute>
           ),
           children: [
-            {
-              path: paths.sales,
-              element: <POSPage />,
-            },
+            // {
+            //   path: paths.sales,
+            //   element: <POSPage />,
+            // },
             {
               path: paths.catalog,
               element: <Landing />,
@@ -85,6 +87,10 @@ const router = createBrowserRouter(
             {
               path: paths.welcome,
               element: <LandingPage />,
+            },
+            {
+              path: paths.about,
+              element: <AboutPage />,
             },
           ],
         },

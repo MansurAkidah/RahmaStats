@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import {
-  AppBar,
-  Toolbar,
+  // AppBar,
+  // Toolbar,
   Typography,
   Container,
   Grid,
@@ -31,6 +31,12 @@ import { ref, get, set } from 'firebase/database'
 import { db } from '../../config/firebase'
 import { formatNumber } from 'functions/formatNumber'
 import { Html5QrcodeScanner } from 'html5-qrcode'
+
+import { ExitToApp } from '@mui/icons-material';
+
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 interface ProductData {
   id: string
@@ -223,6 +229,15 @@ export default function UtensilsPOS() {
   const handleCheckout = () => {
     setIsCheckingOut(true)
   }
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/authentication/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   const completeCheckout = () => {
     alert(`Order placed! ${deliveryOption === 'delivery' ? `Delivery to: ${location}` : 'Pickup from shop'}`)
@@ -254,11 +269,7 @@ export default function UtensilsPOS() {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Utensils and Cutleries POS</Typography>
-        </Toolbar>
-      </AppBar>
+       
       <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Grid container spacing={2} alignItems="center" sx={{ mb: 4 }}>
           <Grid item xs>
@@ -277,6 +288,16 @@ export default function UtensilsPOS() {
               onClick={() => setIsAddProductModalOpen(true)}
             >
               Add Product
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              color="error"
+              startIcon={<ExitToApp />}
+              onClick={handleLogout}
+            >
+              Logout
             </Button>
           </Grid>
         </Grid>

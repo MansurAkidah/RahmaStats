@@ -58,9 +58,9 @@ const Login = () => {
       
       if (result?.user?.email === WHITELISTED_EMAIL) {
         navigate('/')
-      }else
-      if (result) {
-        navigate('/sales/sales'); // This will now work correctly
+      //}else
+      // if (result) {
+      //   navigate('/sales/sales'); // This will now work correctly
       } else {
         const auth = getAuth();
         await signOut(auth);

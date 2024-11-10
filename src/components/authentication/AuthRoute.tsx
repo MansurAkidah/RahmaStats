@@ -9,7 +9,7 @@ const AuthRoute = ({ children }: { children: React.ReactNode }) => {
     if (currentUser?.email === ADMIN_EMAIL) {
       return <Navigate to="/" />;
     }
-    if (currentUser?.email != AGENT_EMAIL){
+    if (currentUser?.email === AGENT_EMAIL){
       return <Navigate to="/pages/catalog" />;
     }
 

@@ -16,8 +16,9 @@ export default {
   accountSettings: `/${rootPaths.pagesRoot}/account-settings`,
   
   welcome: `/${rootPaths.pagesRoot}/welcome`,
-  sales: `/${rootPaths.pagesRoot}/sales`,
+  //sales: `/${rootPaths.pagesRoot}/sales`,
   catalog: `/${rootPaths.pagesRoot}/catalog`,
+  about: `/${rootPaths.pagesRoot}/about`,
 
   login: `/${rootPaths.authRoot}/login`,
   signup: `/${rootPaths.authRoot}/sign-up`,
