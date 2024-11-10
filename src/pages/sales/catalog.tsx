@@ -427,15 +427,15 @@ export default function UtensilsPOS() {
               <TextField
                 sx={{ width: '50%' }}
                 label="Category"
-                type="number"
+                type="text"
                 value={newProduct.category || ''}
                 onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value  })}
                 margin="normal"
               />
               <TextField
                 sx={{ width: '50%' }}
-                label="Image Link"
-                type="number"
+                label="Sub Category"
+                type="text"
                 value={newProduct.subcategory || ''}
                 onChange={(e) => setNewProduct({ ...newProduct, subcategory: e.target.value  })}
                 margin="normal"
@@ -459,7 +459,7 @@ export default function UtensilsPOS() {
               <TextField
                 fullWidth
                 label="Image Link"
-                type="number"
+                type="text"
                 value={newProduct.imageSrc || ''}
                 onChange={(e) => setNewProduct({ ...newProduct, imageSrc: e.target.value  })}
                 margin="normal"

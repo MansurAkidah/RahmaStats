@@ -21,7 +21,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
-import { getAuth, signOut } from 'firebase/auth';
+//import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 export default function LandingPage() {
@@ -29,7 +29,7 @@ export default function LandingPage() {
   const [mode, setMode] = useState<'light' | 'dark'>('light')
 
   
-  const auth = getAuth();
+  //const auth = getAuth();
   const navigate = useNavigate();
 
   const theme = useMemo(
@@ -55,8 +55,8 @@ export default function LandingPage() {
   }
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      navigate('/authentication/login');
+      //await signOut(auth);
+      navigate('/pages/catalog');
     } catch (error) {
       console.error('Error logging out:', error);
     }
